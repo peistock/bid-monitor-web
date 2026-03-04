@@ -1,0 +1,23 @@
+name: Deploy to EdgeOne Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    
+    - name: Deploy to EdgeOne
+      uses: tencentcloud/edgeone-pages-action@v1
+      with:
+        zone-id: ${{ secrets.TENCENT_EDGEONE_ZONE_ID }}
+        api-secret-id: ${{ secrets.TENCENT_SECRET_ID }}
+        api-secret-key: ${{ secrets.TENCENT_SECRET_KEY }}
+        project-name: bid-monitor
+        source-dir: ./
